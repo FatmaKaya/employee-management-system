@@ -1,4 +1,4 @@
-import {Entity, hasOne, model, property} from '@loopback/repository';
+import {Entity, model, property} from '@loopback/repository';
 
 @model({settings: {postgresql: {schema: 'public', table: 'employee'}}})
 export class Employee extends Entity {
@@ -14,13 +14,13 @@ export class Employee extends Entity {
     type: 'string',
     required: true,
   })
-  name: string;
+  name?: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  lastname: string;
+  lastname?: string;
 
   @property({
     type: 'string',
@@ -38,22 +38,13 @@ export class Employee extends Entity {
     type: 'date',
     required: true,
   })
-  jopstartdate: Date;
+  jobstartdate: Date;
 
   @property({
     type: 'number',
     required: true,
   })
   salary: number;
-
-  @hasOne(() => Employee)
-  manager?: Employee;
-
-  @property({
-    type: 'number',
-  })
-  managerid?: number;
-
 
   [prop: string]: any;
 

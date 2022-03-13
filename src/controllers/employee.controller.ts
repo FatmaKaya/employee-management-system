@@ -1,4 +1,4 @@
-import {Filter, FilterExcludingWhere, repository} from '@loopback/repository';
+import {repository} from '@loopback/repository';
 import {get, getModelSchemaRef, param, post, put, requestBody, response} from '@loopback/rest';
 import {Employee} from '../models';
 import {EmployeeRepository} from '../repositories';
@@ -44,9 +44,8 @@ export class EmployeeController {
       },
     },
   })
-  async find(@param.filter(Employee) filter?: Filter<Employee>): Promise<Employee[]> {
-    console.log("first")
-    return this.employeeRepository.find(filter);
+  async find(): Promise<Employee[]> {
+    return this.employeeRepository.find();
   }
 
   @get('/employee/{id}')
@@ -59,13 +58,11 @@ export class EmployeeController {
     },
   })
   async findById(
-    @param.path.number('id') id: number,
-    @param.filter(Employee, {exclude: 'where'}) filter?: FilterExcludingWhere<Employee>,
-  ): Promise<Employee> {
-    return this.employeeRepository.findById(id, filter);
+    @param.path.number('id') id: number): Promise<Employee> {
+    return this.employeeRepository.findById(id);
   }
 
-  @put('/books/{id}')
+  @put('/employee/{id}')
   @response(204, {
     description: 'Book PUT success',
   })
