@@ -64,13 +64,13 @@ export class EmployeeController {
 
   @put('/employee/{id}')
   @response(204, {
-    description: 'Book PUT success',
+    description: 'Employee PUT success',
   })
   async replaceById(
     @param.path.number('id') id: number,
-    @requestBody() book: Employee,
+    @requestBody() employee: Employee,
   ): Promise<void> {
-    await this.employeeRepository.replaceById(id, book);
+    await this.employeeRepository.replaceById(id, employee);
   }
 
 }
